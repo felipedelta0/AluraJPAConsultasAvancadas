@@ -9,11 +9,34 @@ import br.com.alura.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CadastroDeProduto {
 
     public static void main(String[] args) {
+        cadastrarProduto();
 
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoDAO produtoDAO = new ProdutoDAO(em);
+
+        Produto p = produtoDAO.buscarPorId(1L);
+
+        System.out.println(p.getPreco());
+
+        List<Produto> todos = produtoDAO.buscarTodos();
+        todos.forEach(p2 -> System.out.println(p.getNome()));
+
+        todos = produtoDAO.buscarPorNome("Xiaomi Redmi");
+        todos.forEach(p2 -> System.out.println(p.getDescricao()));
+
+        todos = produtoDAO.buscarPorNomeDaCategoria("CELULARES");
+        todos.forEach(p2 -> System.out.println(p.getCategoria().getNome()));
+
+        BigDecimal preco = produtoDAO.buscarPrecoPorId(1L);
+        System.out.println("Preço: " + preco);
+    }
+
+    private static void cadastrarProduto() {
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoDAO produtoDAO = new ProdutoDAO(em);
         CategoriaDAO categoriaDAO = new CategoriaDAO(em);
