@@ -28,12 +28,18 @@ public class Produto {
     private LocalDate dataCadastro = LocalDate.now();
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "categoria_enum")
+    private CategoriaEnum categoriaEnum;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
+    public Produto(String nome, String descricao, BigDecimal preco, CategoriaEnum categoriaEnum, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+        this.categoriaEnum = categoriaEnum;
         this.categoria = categoria;
     }
 }
