@@ -22,8 +22,10 @@ public class CadastroDeProduto {
         Produto celular = new Produto("Xiaomi Redmi", "Topper", new BigDecimal("800"), CategoriaEnum.CELULARES, celulares);
 
         em.getTransaction().begin();
+
         categoriaDAO.cadastrar(celulares);
         produtoDAO.cadastrar(celular);
+
         em.getTransaction().commit();
         em.close();
     }
