@@ -23,7 +23,7 @@ public class Pedido {
 
     private LocalDate data = LocalDate.now();
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
     @ManyToOne
@@ -31,7 +31,7 @@ public class Pedido {
     private Cliente cliente;
 
     @Column(name = "valor_total")
-    private BigDecimal valorTotal;
+    private BigDecimal valorTotal = BigDecimal.ZERO;
 
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
@@ -40,5 +40,6 @@ public class Pedido {
     public void adicionarItem(ItemPedido item) {
         item.setPedido(this);
         this.itens.add(item);
+        valorTotal = valorTotal.add(item.getPrecoUnitario().multiply(new BigDecimal(item.getQuantidade())));
     }
 }
