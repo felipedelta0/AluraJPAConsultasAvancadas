@@ -1,6 +1,7 @@
 package br.com.alura.loja.dao;
 
 import br.com.alura.loja.modelo.Pedido;
+import br.com.alura.loja.vo.RelatorioDeVendasVO;
 import jakarta.persistence.EntityManager;
 
 import java.math.BigDecimal;
@@ -36,17 +37,33 @@ public class PedidoDAO {
         return em.createQuery(jpql, BigDecimal.class).getSingleResult();
     }
 
-    public List<Object[]> relatorioDeVendas() {
-        String jpql = "SELECT produto.nome, " +
+//    public List<Object[]> relatorioDeVendas() {
+//        String jpql = "SELECT produto.nome, " +
+//                "SUM(item.quantidade), " +
+//                "MAX(pedido.data) " +
+//                "FROM Pedido pedido " +
+//                "JOIN pedido.itens item " +
+//                "JOIN item.produto produto " +
+//                "GROUP BY produto.nome " +
+//                "ORDER BY 2 DESC";
+//
+//        return em.createQuery(jpql, Object[].class)
+//                .getResultList();
+//    }
+
+    public List<RelatorioDeVendasVO> relatorioDeVendas() {
+        String jpql = "SELECT new " +
+                "br.com.alura.loja.vo.RelatorioDeVendasVO(" +
+                "produto.nome, " +
                 "SUM(item.quantidade), " +
-                "MAX(pedido.data) " +
+                "MAX(pedido.data)) " +
                 "FROM Pedido pedido " +
                 "JOIN pedido.itens item " +
                 "JOIN item.produto produto " +
                 "GROUP BY produto.nome " +
                 "ORDER BY 2 DESC";
 
-        return em.createQuery(jpql, Object[].class)
+        return em.createQuery(jpql, RelatorioDeVendasVO.class)
                 .getResultList();
     }
 }
