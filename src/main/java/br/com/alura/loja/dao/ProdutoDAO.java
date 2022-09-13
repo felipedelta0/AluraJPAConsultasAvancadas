@@ -44,14 +44,13 @@ public class ProdutoDAO {
     }
 
     public List<Produto> buscarPorNomeDaCategoria(String nome) {
-        String jpql = "SELECT p FROM Produto p WHERE p.categoria.nome = :nome"; //Nome da entidade e não da tabela, nome do atributo e nao da coluna
-        return this.em.createQuery(jpql, Produto.class)
+        return this.em.createNamedQuery("Produto.produtosPorCategoria", Produto.class)
                 .setParameter("nome", nome)
                 .getResultList();
     }
 
     public BigDecimal buscarPrecoPorId(Long id) {
-        String jpql = "SELECT p.preco FROM Produto p WHERE p.id = :id"; //Nome da entidade e não da tabela, nome do atributo e nao da coluna
+        String jpql = "SELECT p.preco FROM Produto p WHERE p.id = :id";
         return this.em.createQuery(jpql, BigDecimal.class)
                 .setParameter("id", id)
                 .getSingleResult();
