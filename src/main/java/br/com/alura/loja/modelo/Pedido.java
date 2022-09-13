@@ -40,6 +40,6 @@ public class Pedido {
     public void adicionarItem(ItemPedido item) {
         item.setPedido(this);
         this.itens.add(item);
-        valorTotal = valorTotal.add(item.getPrecoUnitario().multiply(new BigDecimal(item.getQuantidade())));
+        valorTotal = valorTotal.add(item.getValorTotal());
     }
 }
