@@ -18,6 +18,15 @@ public class ProdutoDAO {
         this.em.persist(produto);
     }
 
+    public void atualizar(Produto produto) {
+        this.em.merge(produto);
+    }
+
+    public void remover(Produto produto) {
+        produto = em.merge(produto);
+        this.em.remove(produto);
+    }
+
     public Produto buscarPorId(Long id) {
         return this.em.find(Produto.class, id);
     }
@@ -32,11 +41,6 @@ public class ProdutoDAO {
         return this.em.createQuery(jpql, Produto.class)
                 .setParameter("nome", nome)
                 .getResultList();
-
-//        String jpql = "SELECT p FROM Produto p WHERE p.nome = ?1"; //Nome da entidade e não da tabela, nome do atributo e nao da coluna
-//        return this.em.createQuery(jpql, Produto.class)
-//                .setParameter(1, nome)
-//                .getResultList();
     }
 
     public List<Produto> buscarPorNomeDaCategoria(String nome) {
