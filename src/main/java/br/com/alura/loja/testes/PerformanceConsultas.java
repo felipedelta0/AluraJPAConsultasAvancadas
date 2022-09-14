@@ -9,6 +9,8 @@ import br.com.alura.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
 public class PerformanceConsultas {
 
@@ -19,6 +21,12 @@ public class PerformanceConsultas {
 
         Pedido pedido = em.find(Pedido.class, 1L);
         System.out.println(pedido.getItens().size());
+
+        ProdutoDAO produtoDAO = new ProdutoDAO(em);
+//        List<Produto> produtos = produtoDAO.buscarPorParametros(null, null, LocalDate.now());
+        List<Produto> produtos = produtoDAO.buscarPorParametrosComCriteria(null, null, LocalDate.now());
+
+        produtos.forEach(System.out::println);
     }
 
     private static void popularBancoDeDados() {

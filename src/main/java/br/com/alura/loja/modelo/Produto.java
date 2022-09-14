@@ -1,10 +1,7 @@
 package br.com.alura.loja.modelo;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -42,5 +39,18 @@ public class Produto {
         this.preco = preco;
         this.categoriaEnum = categoriaEnum;
         this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", preco=" + preco +
+                ", dataCadastro=" + dataCadastro +
+                ", categoriaEnum=" + categoriaEnum +
+                ", categoria=" + categoria +
+                '}';
     }
 }
