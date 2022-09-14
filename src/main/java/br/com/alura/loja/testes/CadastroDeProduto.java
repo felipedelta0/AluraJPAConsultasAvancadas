@@ -4,6 +4,7 @@ import br.com.alura.loja.dao.CategoriaDAO;
 import br.com.alura.loja.dao.ProdutoDAO;
 import br.com.alura.loja.modelo.Categoria;
 import br.com.alura.loja.modelo.CategoriaEnum;
+import br.com.alura.loja.modelo.CategoriaID;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -42,6 +43,10 @@ public class CadastroDeProduto {
         produtoDAO.cadastrar(celular);
 
         em.getTransaction().commit();
+
+        // Chave composta
+        em.find(Categoria.class, new CategoriaID("CELULARES", "xpto"));
+
         em.close();
     }
 }
