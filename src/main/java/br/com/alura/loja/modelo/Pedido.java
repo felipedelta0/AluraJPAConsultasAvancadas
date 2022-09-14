@@ -17,16 +17,21 @@ import java.util.List;
 @NoArgsConstructor
 public class Pedido {
 
+    /*
+        Relacionamentos toOne: carregamento eager, carrega junto com a entidade mesmo que não use
+        Relacionamentos toMany: carregamento lazy, apenas se for feito o acesso
+     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate data = LocalDate.now();
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL) // sempre que for ToMany não carrega automaticamente, apenas quando chama
     private List<ItemPedido> itens = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // sempre que for xToOne -> carrega junto através de um join
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

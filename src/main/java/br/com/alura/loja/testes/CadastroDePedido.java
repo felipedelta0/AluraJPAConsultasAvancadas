@@ -15,30 +15,30 @@ import java.util.List;
 public class CadastroDePedido {
 
     public static void main(String[] args) {
-        popularBancoDeDados();
+//        popularBancoDeDados();
 
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoDAO produtoDAO = new ProdutoDAO(em);
         PedidoDAO pedidoDAO = new PedidoDAO(em);
         ClienteDAO clienteDAO = new ClienteDAO(em);
 
-        Produto produto = produtoDAO.buscarPorId(1L);
-        Produto produto2 = produtoDAO.buscarPorId(2L);
-        Produto produto3 = produtoDAO.buscarPorId(3L);
-        Cliente cliente = clienteDAO.buscarPorId(1L);
-        Cliente cliente2 = clienteDAO.buscarPorId(2L);
-        Pedido pedido = new Pedido(cliente);
-        Pedido pedido2 = new Pedido(cliente2);
+//        Produto produto = produtoDAO.buscarPorId(1L);
+//        Produto produto2 = produtoDAO.buscarPorId(2L);
+//        Produto produto3 = produtoDAO.buscarPorId(3L);
+//        Cliente cliente = clienteDAO.buscarPorId(1L);
+//        Cliente cliente2 = clienteDAO.buscarPorId(2L);
+//        Pedido pedido = new Pedido(cliente);
+//        Pedido pedido2 = new Pedido(cliente2);
 
         em.getTransaction().begin();
 
-        pedido.adicionarItem(new ItemPedido(21, pedido, produto));
-        pedido.adicionarItem(new ItemPedido(7, pedido, produto2));
-        pedidoDAO.cadastrar(pedido);
-
-        pedido2.adicionarItem(new ItemPedido(34, pedido2, produto3));
-        pedido2.adicionarItem(new ItemPedido(2, pedido2, produto2));
-        pedidoDAO.cadastrar(pedido2);
+//        pedido.adicionarItem(new ItemPedido(21, pedido, produto));
+//        pedido.adicionarItem(new ItemPedido(7, pedido, produto2));
+//        pedidoDAO.cadastrar(pedido);
+//
+//        pedido2.adicionarItem(new ItemPedido(34, pedido2, produto3));
+//        pedido2.adicionarItem(new ItemPedido(2, pedido2, produto2));
+//        pedidoDAO.cadastrar(pedido2);
 
         em.getTransaction().commit();
 
