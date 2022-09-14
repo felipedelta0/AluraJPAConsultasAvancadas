@@ -34,7 +34,10 @@ public class Produto {
     private CategoriaEnum categoriaEnum;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id")
+    @JoinColumns({
+            @JoinColumn(name = "categoria_name"),
+            @JoinColumn(name = "categoria_tipo")
+    })
     private Categoria categoria;
 
     public Produto(String nome, String descricao, BigDecimal preco, CategoriaEnum categoriaEnum, Categoria categoria) {
