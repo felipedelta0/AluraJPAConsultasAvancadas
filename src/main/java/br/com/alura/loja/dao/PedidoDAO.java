@@ -37,6 +37,12 @@ public class PedidoDAO {
         return em.createQuery(jpql, BigDecimal.class).getSingleResult();
     }
 
+    public Pedido buscarPedidoComCliente(Long id) {
+        return em.createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id", Pedido.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
 //    public List<Object[]> relatorioDeVendas() {
 //        String jpql = "SELECT produto.nome, " +
 //                "SUM(item.quantidade), " +
